@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>第一次尝试搭建博客，以后这里用来记录自己前端学习轨迹 | 葛瑞兵的个人博客</title>
+  <title>typescript的学习 | 葛瑞兵的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Stay foolish Stay hungry Stay dreaming.">
+  <meta name="description" content="学习angular2过程中,typescript初步了解，es6之前还没看完，需要去补一下.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一次尝试搭建博客，以后这里用来记录自己前端学习轨迹">
-<meta property="og:url" content="http://yoursite.com/2016/04/01/第一次尝试搭建博客，以后这里用来记录自己前端学习轨迹/index.html">
+<meta property="og:title" content="typescript的学习">
+<meta property="og:url" content="http://yoursite.com/2017/01/01/typescript的学习/index.html">
 <meta property="og:site_name" content="葛瑞兵的个人博客">
-<meta property="og:description" content="Stay foolish Stay hungry Stay dreaming.">
-<meta property="og:updated_time" content="2016-12-31T05:08:27.500Z">
+<meta property="og:description" content="学习angular2过程中,typescript初步了解，es6之前还没看完，需要去补一下.">
+<meta property="og:updated_time" content="2017-01-01T15:20:51.577Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第一次尝试搭建博客，以后这里用来记录自己前端学习轨迹">
-<meta name="twitter:description" content="Stay foolish Stay hungry Stay dreaming.">
+<meta name="twitter:title" content="typescript的学习">
+<meta name="twitter:description" content="学习angular2过程中,typescript初步了解，es6之前还没看完，需要去补一下.">
   
     <link rel="alternative" href="/atom.xml" title="葛瑞兵的个人博客" type="application/atom+xml">
   
@@ -180,11 +180,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-第一次尝试搭建博客，以后这里用来记录自己前端学习轨迹" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-typescript的学习" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/01/第一次尝试搭建博客，以后这里用来记录自己前端学习轨迹/" class="article-date">
-  	<time datetime="2016-04-01T15:58:26.000Z" itemprop="datePublished">2016-04-01</time>
+      <a href="/2017/01/01/typescript的学习/" class="article-date">
+  	<time datetime="2017-01-01T15:16:06.000Z" itemprop="datePublished">2017-01-01</time>
 </a>
     </div>
   
@@ -197,7 +197,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      第一次尝试搭建博客，以后这里用来记录自己前端学习轨迹
+      typescript的学习
     </h1>
   
 
@@ -205,10 +205,6 @@
       
       <div class="article-info article-info-post">
         
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">-随笔</a></li></ul>
-	</div>
-
         
 
         <div class="clearfix"></div>
@@ -217,7 +213,97 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Stay foolish Stay hungry Stay dreaming.</p>
+        <p>学习angular2过程中,typescript初步了解，es6之前还没看完，需要去补一下.<br><a id="more"></a></p>
+<p>##使用typescript需要安装：</p>
+<ol>
+<li>安装typescript :npm install -g typescript@1.8</li>
+<li>编译ts文件 tsc hello.ts</li>
+<li>node执行 hello.js</li>
+</ol>
+<p>###ts-node模块将编译和执行组合起来</p>
+<pre><code>1. 安装 npm install ts-node
+2. 使用 ts-node hello.ts
+</code></pre><p>##typescript引入的es2015和es2016上的特性<br>    1.箭头函数<br>    var result=[1,2,3].reduce(<br>       (total,current)=&gt;total+current,0<br>    )</p>
+<p>###箭头函数的执行上下文(this)指向外层的代码<br>    使用箭头函数<br>    function MyComponent(){<br>        this.age=42;<br>        setTimeout(<br>           ()=&gt;{<br>                this.age+=1;<br>                console.log(this.age);<br>           },100<br>        );<br>    }</p>
+<pre><code>new MyComponnet();//43 in 100ms
+
+不使用箭头函数
+
+function MyComponent(){
+    this.age=42;
+    setTimeout(
+       function(){
+            this.age+=1;
+            console.log(this.age);
+       },100 
+    );
+}
+new MyComponnet();//NAN in 100ms
+</code></pre><p>###类的使用<br>    class Human {<br>      static totalPeople = 0;<br>      _name; // ES2016 property declaration syntax<br>      constructor(name) {<br>        this._name = name;<br>        Human.totalPeople += 1;<br>      }<br>      get name() {<br>        return this._name;<br>      }<br>      set name(val) {<br>        this._name = val;<br>      }<br>      talk() {<br>        return <code>Hi, I&#39;m ${this.name}!</code>;<br>      }<br>    }</p>
+<pre><code>class Developer extends Human {
+  _languages; // ES2016 property declaration syntax
+  constructor(name, languages) {
+    super(name);
+    this._languages = languages;
+  }
+  get languages() {
+    return this._languages;
+  }
+  talk() {
+    return `${super.talk()} And I know ${this.languages.join(&apos;, &apos;)}.`;
+  }
+}
+
+var human =new Human(&quot;footbar&quot;);
+var dev=new Developer(&quot;bar&quot;,[&quot;javaScript&quot;]);
+console.log(dev.talk());
+console.log(human.talk());
+</code></pre><p>##块级作用域 let的使用</p>
+<p>##装饰器进行元编程(装饰器类似java注解)<br>    angular2用来定义组件，指令以及指令，跟依赖注入的机制混合使用。<br>    class Person {<br>      @nonenumerable<br>      get kidCount() {<br>        return 42;<br>      }<br>    }</p>
+<pre><code>function nonenumerable(target, name, descriptor) {
+  descriptor.enumerable = false;
+  return descriptor;
+}
+
+var person = new Person();
+
+for (let prop in person) {
+  console.log(prop);
+}
+
+console.log(person.kidCount);
+</code></pre><p>##es2015的模块语法</p>
+<p>###导出<br>    function square(x){<br>        return Math.pow(x,2);<br>    }</p>
+<pre><code>function log10(x){
+    return Math.log10(x);
+}
+
+export {square,log10};
+</code></pre><p>###导入<br>    import {square,log10} from ‘./math’;</p>
+<pre><code>##ts是js的超集，ts独有的特性
+
+### ts静态类型的特性
+let foo=42;//类型推断机制，foo为number型
+foo=&quot;42&quot;; //tsc编译报错
+</code></pre><h3 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h3><pre><code>enum STATES{
+    CONNECTING,
+    CONNECTED,
+    DISCONNECTING,
+    WAITING,
+    DISCONNECTED
+} 
+</code></pre><p>###函数类型<br>    需要声明函数参数类型和返回值类型，没有返回值定义成void<br>    函数声明式的写法：<br>    function isPrime(n:Number):boolean{</p>
+<pre><code>}
+</code></pre><p>##类的访问修饰符<br>    public private protected跟java是类似的<br>    类的继承支持extends关键字，可以转换成基于原型继承的js代码</p>
+<p>##接口的定义<br>    interface Accountable{<br>        accountNumber: string<br>        getIncome():number;<br>    }</p>
+<pre><code>class Firm implements Accountable{
+    getIncome():number{
+        ...
+    }
+}
+
+接口的继承跟java类似
+</code></pre><p>##编写泛型代码<br>    class Node<t>{<br>        value: T;<br>        left:Node<t>;<br>        right:Node<t>;<br>    }<br>    Node<t>表示这个类可以接受单个参数T，这个参数在类中会用到;<br>    let numberNode=new Node<number>();<br>    numberNode.value=”42”;//报错</number></t></t></t></t></p>
 
       
     </div>
@@ -227,15 +313,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/12/31/2016总结-2017目标/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          2016总结 2017目标
-        
-      </div>
-    </a>
   
+    <a href="/2016/12/31/2016总结-2017目标/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">2016总结 2017目标</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
@@ -268,7 +350,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="第一次尝试搭建博客，以后这里用来记录自己前端学习轨迹" data-title="第一次尝试搭建博客，以后这里用来记录自己前端学习轨迹" data-url="http://yoursite.com/2016/04/01/第一次尝试搭建博客，以后这里用来记录自己前端学习轨迹/"></div>
+	<div class="ds-thread" data-thread-key="typescript的学习" data-title="typescript的学习" data-url="http://yoursite.com/2017/01/01/typescript的学习/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
